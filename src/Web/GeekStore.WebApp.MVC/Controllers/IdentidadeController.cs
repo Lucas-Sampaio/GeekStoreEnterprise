@@ -31,18 +31,20 @@ namespace GeekStore.WebApp.MVC.Controllers
             await RealizarLogin(resposta);
             return View();
         }
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UsuarioLoginVM model)
+        public async Task<IActionResult> Login(UsuarioLoginVM model, string returnUrl = null)
         {
             if (!ModelState.IsValid) return View(model);
             var resposta = await _autenticacaoService.Login(model);
             if (ResponsePossuiErros(resposta.ErroResult)) return View(model);
             await RealizarLogin(resposta);
+            if (!string.IsNullOrWhiteSpace(returnUrl)) return LocalRedirect(returnUrl);
             return View();
         }
 

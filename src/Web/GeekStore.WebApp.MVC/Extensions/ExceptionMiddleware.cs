@@ -16,6 +16,7 @@ namespace GeekStore.WebApp.MVC.Extensions
 
         public async Task InvokeAsync(HttpContext httpContext)
         {
+            //as requisiçoes passa por esse metodo, se der erro ele trata se não continua
             try
             {
                 await _next(httpContext);
@@ -31,7 +32,7 @@ namespace GeekStore.WebApp.MVC.Extensions
         {
             if (httpRequestException.StatusCode == HttpStatusCode.Unauthorized)
             {
-                context.Response.Redirect("/login");
+                context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
                 return;
             }
 
