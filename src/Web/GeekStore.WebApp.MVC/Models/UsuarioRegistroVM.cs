@@ -14,5 +14,8 @@ namespace GeekStore.WebApp.MVC.Models
         [Compare("Senha", ErrorMessage = "As senhas não conferem")]
         [DataType(DataType.Password)]
         public string SenhaConfirmacao { get; set; }
+
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
     }
 }
