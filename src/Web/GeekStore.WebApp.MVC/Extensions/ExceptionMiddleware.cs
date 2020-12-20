@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace GeekStore.WebApp.MVC.Extensions
 {
@@ -11,7 +10,7 @@ namespace GeekStore.WebApp.MVC.Extensions
 
         public ExceptionMiddleware(RequestDelegate next)
         {
-            _next = next;  
+            _next = next;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -23,7 +22,7 @@ namespace GeekStore.WebApp.MVC.Extensions
             }
             catch (CustomHttpRequestException ex)
             {
-               HandleRequestExceptionAsync(httpContext,ex);
+                HandleRequestExceptionAsync(httpContext, ex);
             }
         }
 
@@ -36,7 +35,7 @@ namespace GeekStore.WebApp.MVC.Extensions
                 return;
             }
 
-            context.Response.StatusCode = (int) httpRequestException.StatusCode;
+            context.Response.StatusCode = (int)httpRequestException.StatusCode;
         }
     }
 }

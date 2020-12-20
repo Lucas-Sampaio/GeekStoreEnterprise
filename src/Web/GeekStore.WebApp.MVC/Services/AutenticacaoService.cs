@@ -1,9 +1,8 @@
-﻿using GeekStore.WebApp.MVC.Models;
-using System;
+﻿using GeekStore.WebApp.MVC.Extensions;
+using GeekStore.WebApp.MVC.Models;
+using Microsoft.Extensions.Options;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json;
 
 namespace GeekStore.WebApp.MVC.Services
 {
@@ -11,44 +10,42 @@ namespace GeekStore.WebApp.MVC.Services
     {
         private readonly HttpClient _httpClient;
 
-        public AutenticacaoService(HttpClient httpClient)
+        public AutenticacaoService(HttpClient httpClient, IOptions<AppSettings> settings)
         {
             _httpClient = httpClient;
+            _httpClient.BaseAddress = new System.Uri(settings.Value.AutenticacaoUrl);
         }
         public async Task<UsuarioRespostaLogin> Login(UsuarioLoginVM usuarioLogin)
-        {
-            var loginContent = new StringContent(JsonSerializer.Serialize(usuarioLogin),Encoding.UTF8,"application/json");
-            var response = await _httpClient.PostAsync("https://localhost:5001/api/Auth/Login", loginContent);
+        { 
+            var loginContent = ObterConteudo(usuarioLogin);
+            var response = await _httpClient.PostAsync("/api/Auth/Login", loginContent);
 
-            var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
             if (!TratarErrosResponse(response))
             {
                 return new UsuarioRespostaLogin()
                 {
-                    ErroResult =
-                        JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                    ErroResult = await DeserializarObjetoResponse<ResponseResult>(response)
                 };
             }
-            
-            var result = JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(),options);
+
+            var result = await DeserializarObjetoResponse<UsuarioRespostaLogin>(response);
             return result;
         }
 
         public async Task<UsuarioRespostaLogin> Registro(UsuarioRegistroVM usuarioRegistro)
         {
-            var registroContent = new StringContent(JsonSerializer.Serialize(usuarioRegistro), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("https://localhost:5001/api/Auth/Registrar", registroContent);
-            var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+            var registroContent = ObterConteudo(usuarioRegistro);
+            var response = await _httpClient.PostAsync("/api/Auth/Registrar", registroContent);
+
             if (!TratarErrosResponse(response))
             {
                 return new UsuarioRespostaLogin()
                 {
-                    ErroResult =
-                        JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                    ErroResult = await DeserializarObjetoResponse<ResponseResult>(response)
                 };
             }
-            var result = JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
+            var result = await DeserializarObjetoResponse<UsuarioRespostaLogin>(response);
             return result;
         }
     }
