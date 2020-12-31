@@ -32,7 +32,7 @@ namespace GeekStore.WebApp.MVC
         {
             services.AddIdentityConfiguration();
             services.AddMvcConfiguration(Configuration);
-            services.RegisterService();
+            services.RegisterService(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

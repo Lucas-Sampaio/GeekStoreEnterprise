@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{648ED3E6-38B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{F430E548-8FB9-4D50-BFFC-8DC728AF6814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Identity.Api", "src\Services\GeekStore.Identity.Api\GeekStore.Identity.Api.csproj", "{CD8E0115-B005-40C8-9CC3-8C05C27C67B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Api", "src\Services\GeekStore.Identity.Api\GeekStore.Identity.Api.csproj", "{CD8E0115-B005-40C8-9CC3-8C05C27C67B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{F0F7AE45-76DA-4A7E-A1E1-87585768D1AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.WebApp.MVC", "src\Web\GeekStore.WebApp.MVC\GeekStore.WebApp.MVC.csproj", "{966F1F10-2A7A-41C0-AD50-FA31529FF2C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.WebApp.MVC", "src\Web\GeekStore.WebApp.MVC\GeekStore.WebApp.MVC.csproj", "{966F1F10-2A7A-41C0-AD50-FA31529FF2C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{00D165DA-2BB5-443F-9C05-EA4A2394514B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Core", "src\Building Blocks\GeekStore.Core\GeekStore.Core.csproj", "{67A866AD-BD91-4EAC-A2E5-A7AD51BA798F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Core", "src\Building Blocks\GeekStore.Core\GeekStore.Core.csproj", "{67A866AD-BD91-4EAC-A2E5-A7AD51BA798F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Carrinho", "Carrinho", "{A77B4829-E8AB-444C-8785-6D4E90B1B0E3}"
 EndProject
@@ -33,15 +33,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagamento", "Pagamento", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pedido", "Pedido", "{BC7F4BAF-683F-4B9E-B5C5-D627A5EA1F4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Carrinho.Api", "src\Services\GeekStore.Carrinho.Api\GeekStore.Carrinho.Api.csproj", "{86320681-1762-4FAE-A981-B40507714B9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Carrinho.Api", "src\Services\GeekStore.Carrinho.Api\GeekStore.Carrinho.Api.csproj", "{86320681-1762-4FAE-A981-B40507714B9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Catalogo.Api", "src\Services\GeekStore.Catalogo.Api\GeekStore.Catalogo.Api.csproj", "{AE9EFFA2-591D-4B3C-880F-3C70354156D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Catalogo.Api", "src\Services\GeekStore.Catalogo.Api\GeekStore.Catalogo.Api.csproj", "{AE9EFFA2-591D-4B3C-880F-3C70354156D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Cliente.Api", "src\Services\GeekStore.Cliente.Api\GeekStore.Cliente.Api.csproj", "{E9D0DDE1-CEA9-4483-A6FA-FDE738E0A3DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cliente.Api", "src\Services\GeekStore.Cliente.Api\GeekStore.Cliente.Api.csproj", "{E9D0DDE1-CEA9-4483-A6FA-FDE738E0A3DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Pagamento.Api", "src\Services\GeekStore.Pagamento.Api\GeekStore.Pagamento.Api.csproj", "{CC387588-8E1F-4903-AD0E-C7B01BBBC967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Pagamento.Api", "src\Services\GeekStore.Pagamento.Api\GeekStore.Pagamento.Api.csproj", "{CC387588-8E1F-4903-AD0E-C7B01BBBC967}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Pedido.Api", "src\Services\GeekStore.Pedido.Api\GeekStore.Pedido.Api.csproj", "{B0C4A430-1BBF-424B-9E98-39E455355C99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Pedido.Api", "src\Services\GeekStore.Pedido.Api\GeekStore.Pedido.Api.csproj", "{B0C4A430-1BBF-424B-9E98-39E455355C99}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3C91C833-A18E-4D6B-8925-67E34BE76DBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geek.WebApi.Core", "Geek.WebApi.Core\Geek.WebApi.Core.csproj", "{0B861198-E1E6-48A6-B8A7-30B875F9882B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +85,10 @@ Global
 		{B0C4A430-1BBF-424B-9E98-39E455355C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0C4A430-1BBF-424B-9E98-39E455355C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0C4A430-1BBF-424B-9E98-39E455355C99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B861198-E1E6-48A6-B8A7-30B875F9882B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B861198-E1E6-48A6-B8A7-30B875F9882B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B861198-E1E6-48A6-B8A7-30B875F9882B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B861198-E1E6-48A6-B8A7-30B875F9882B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +113,8 @@ Global
 		{E9D0DDE1-CEA9-4483-A6FA-FDE738E0A3DF} = {F3F4916D-B4E5-4B97-BDA5-87A259FADD38}
 		{CC387588-8E1F-4903-AD0E-C7B01BBBC967} = {EBBE7190-5F94-4200-8752-26437D6610A1}
 		{B0C4A430-1BBF-424B-9E98-39E455355C99} = {BC7F4BAF-683F-4B9E-B5C5-D627A5EA1F4D}
+		{3C91C833-A18E-4D6B-8925-67E34BE76DBA} = {22D8E2D9-DB33-4F98-8909-0401F3B72100}
+		{0B861198-E1E6-48A6-B8A7-30B875F9882B} = {3C91C833-A18E-4D6B-8925-67E34BE76DBA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {915C969B-2E42-488F-AFC4-02AFE233EC64}

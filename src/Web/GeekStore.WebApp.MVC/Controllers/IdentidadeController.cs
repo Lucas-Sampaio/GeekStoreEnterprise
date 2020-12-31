@@ -41,10 +41,15 @@ namespace GeekStore.WebApp.MVC.Controllers
         public async Task<IActionResult> Login(UsuarioLoginVM model, string returnUrl = null)
         {
             if (!ModelState.IsValid) return View(model);
+
             var resposta = await _autenticacaoService.Login(model);
+
             if (ResponsePossuiErros(resposta.ErroResult)) return View(model);
+
             await RealizarLogin(resposta);
+
             if (!string.IsNullOrWhiteSpace(returnUrl)) return LocalRedirect(returnUrl);
+
             return View();
         }
 

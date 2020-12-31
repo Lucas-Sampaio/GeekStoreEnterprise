@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Globalization;
 
 namespace GeekStore.WebApp.MVC.Configuration
 {
@@ -32,6 +33,13 @@ namespace GeekStore.WebApp.MVC.Configuration
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            var supportedCultures = new[] { new CultureInfo("pt-br") };
+            app.UseRequestLocalization(new RequestLocalizationOptions {
+                DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("pt-Br"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            
+            });
             app.UseRouting();
             app.UseIdentityConfiguration();
             app.UseMiddleware<ExceptionMiddleware>(); //faz com q todas requisiçoes passe por ele 
@@ -39,7 +47,7 @@ namespace GeekStore.WebApp.MVC.Configuration
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Catalogo}/{action=Index}/{id?}");
             });
             return app;
         }

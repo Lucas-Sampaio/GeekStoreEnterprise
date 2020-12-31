@@ -1,4 +1,4 @@
-﻿namespace GeekStore.Identity.Api.Configuration
+﻿namespace Geek.WebApi.Core.Identidade
 {
     public class TokenConfiguration
     {
