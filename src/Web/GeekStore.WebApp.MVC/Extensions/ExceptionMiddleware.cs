@@ -34,9 +34,9 @@ namespace GeekStore.WebApp.MVC.Extensions
             {
                 HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }
-            catch (BrokenCircuitException ex)
+            catch (BrokenCircuitException)
             {
-                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
+                HandleCircuitBreakerExceptionAsync(httpContext);
             }
         }
 
@@ -45,14 +45,13 @@ namespace GeekStore.WebApp.MVC.Extensions
         {
             if (statusCode == HttpStatusCode.Unauthorized)
             {
-                context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
+                context.Response.Redirect($"/login?returnUrl={context.Request.Path}");
                 return;
             }
 
             context.Response.StatusCode = (int)statusCode;
         }
-        private static void HandleCircuitBreakerExceptionAsync(HttpContext context,
-            HttpStatusCode statusCode)
+        private static void HandleCircuitBreakerExceptionAsync(HttpContext context)
         {
             context.Response.Redirect("/sistema-indisponivel");      
         }

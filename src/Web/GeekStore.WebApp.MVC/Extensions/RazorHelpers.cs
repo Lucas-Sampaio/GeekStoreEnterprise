@@ -17,7 +17,7 @@ namespace GeekStore.WebApp.MVC.Extensions
         }
         public static string FormatoMoeda(this RazorPage page, decimal valor)
         {
-            return valor > 0 ? string.Format(Thread.CurrentThread.CurrentCulture,"{0:C}") : "Gratuito";
+            return valor > 0 ? valor.ToString("C") : "Gratuito";
         }
         public static string HashEmailForGravatar(this RazorPage page, string email)
         {

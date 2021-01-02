@@ -31,6 +31,8 @@ namespace GeekStore.WebApp.MVC.Controllers
             await RealizarLogin(resposta);
             return View();
         }
+      
+        [Route("login")]
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -38,6 +40,7 @@ namespace GeekStore.WebApp.MVC.Controllers
         }
 
         [HttpPost]
+        [Route("login")]
         public async Task<IActionResult> Login(UsuarioLoginVM model, string returnUrl = null)
         {
             if (!ModelState.IsValid) return View(model);
