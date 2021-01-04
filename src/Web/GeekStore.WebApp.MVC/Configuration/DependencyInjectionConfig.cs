@@ -1,7 +1,9 @@
 ﻿using GeekStore.WebApp.MVC.Extensions;
+using GeekStore.WebApp.MVC.Extensions.Atributos;
 using GeekStore.WebApp.MVC.Services;
 using GeekStore.WebApp.MVC.Services.Handlers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -16,6 +18,7 @@ namespace GeekStore.WebApp.MVC.Configuration
     {
         public static IServiceCollection RegisterService(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
 
             //services.AddHttpClient<ICatalogoService, CatalogoService>()

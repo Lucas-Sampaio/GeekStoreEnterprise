@@ -1,23 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace GeekStore.Identity.Api.Controllers
+namespace Geek.WebApi.Core.Controller
 {
     [ApiController]
-    public abstract class GenericController : ControllerBase
+    public abstract class MainController : ControllerBase
     {
-        protected  ICollection<string> Erros = new List<string>();
+        protected ICollection<string> Erros = new List<string>();
 
         protected ActionResult CustomResponse(object result = null)
         {
             if (OperacaoValida())
             {
-                return Ok(result); 
+                return Ok(result);
             }
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
@@ -31,7 +29,16 @@ namespace GeekStore.Identity.Api.Controllers
 
             foreach (var item in erros)
             {
-               adicionarErroProcessamento(item.ErrorMessage); 
+                AdicionarErroProcessamento(item.ErrorMessage);
+            }
+
+            return CustomResponse();
+        }
+        protected ActionResult CustomResponse(ValidationResult validationsResult)
+        {
+            foreach (var item in validationsResult.Errors)
+            {
+                AdicionarErroProcessamento(item.ErrorMessage);
             }
 
             return CustomResponse();
@@ -41,7 +48,7 @@ namespace GeekStore.Identity.Api.Controllers
             return !Erros.Any();
         }
 
-        protected void adicionarErroProcessamento(string erro)
+        protected void AdicionarErroProcessamento(string erro)
         {
             Erros.Add(erro);
         }

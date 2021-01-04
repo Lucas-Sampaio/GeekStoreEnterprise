@@ -1,4 +1,5 @@
-﻿using Geek.WebApi.Core.Identidade;
+﻿using Geek.WebApi.Core.Controller;
+using Geek.WebApi.Core.Identidade;
 using GeekStore.Catalogo.Api.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace GeekStore.Catalogo.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CatalogoController : ControllerBase
+    [Route("api/[controller]")] 
+    public class CatalogoController : MainController
     {
         private readonly IProdutoRepository _produtoRepository;
 

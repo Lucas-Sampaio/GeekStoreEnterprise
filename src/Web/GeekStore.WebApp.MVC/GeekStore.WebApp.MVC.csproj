@@ -17,4 +17,8 @@
     <PackageReference Include="Refit" Version="5.2.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Building Blocks\GeekStore.Core\GeekStore.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Carrinho.Api", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Catalogo.Api", "src\Services\GeekStore.Catalogo.Api\GeekStore.Catalogo.Api.csproj", "{AE9EFFA2-591D-4B3C-880F-3C70354156D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cliente.Api", "src\Services\GeekStore.Cliente.Api\GeekStore.Cliente.Api.csproj", "{E9D0DDE1-CEA9-4483-A6FA-FDE738E0A3DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Clientes.Api", "src\Services\GeekStore.Cliente.Api\GeekStore.Clientes.Api.csproj", "{E9D0DDE1-CEA9-4483-A6FA-FDE738E0A3DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Pagamento.Api", "src\Services\GeekStore.Pagamento.Api\GeekStore.Pagamento.Api.csproj", "{CC387588-8E1F-4903-AD0E-C7B01BBBC967}"
 EndProject
@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Pedido.Api", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3C91C833-A18E-4D6B-8925-67E34BE76DBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geek.WebApi.Core", "Geek.WebApi.Core\Geek.WebApi.Core.csproj", "{0B861198-E1E6-48A6-B8A7-30B875F9882B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geek.WebApi.Core", "Geek.WebApi.Core\Geek.WebApi.Core.csproj", "{0B861198-E1E6-48A6-B8A7-30B875F9882B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

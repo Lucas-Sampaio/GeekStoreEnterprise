@@ -1,4 +1,5 @@
-﻿using Geek.WebApi.Core.Identidade;
+﻿using Geek.WebApi.Core.Controller;
+using Geek.WebApi.Core.Identidade;
 using GeekStore.Identity.Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegiste
 namespace GeekStore.Identity.Api.Controllers
 {
     [Route("api/[controller]")]
-    public class AuthController : GenericController
+    public class AuthController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
@@ -50,7 +51,7 @@ namespace GeekStore.Identity.Api.Controllers
 
             foreach (var item in result.Errors)
             {
-                adicionarErroProcessamento(item.Description);
+                AdicionarErroProcessamento(item.Description);
             }
             return CustomResponse();
         }
@@ -69,9 +70,9 @@ namespace GeekStore.Identity.Api.Controllers
                 }
                 if (result.IsLockedOut)
                 {
-                    adicionarErroProcessamento("Usuário temporariamente bloqueado por tentativas inválidas");
+                    AdicionarErroProcessamento("Usuário temporariamente bloqueado por tentativas inválidas");
                 }
-                adicionarErroProcessamento("Usuário ou senha invalidas");
+                AdicionarErroProcessamento("Usuário ou senha invalidas");
 
             }
             catch (Exception e)
