@@ -10,7 +10,7 @@ namespace GeekStore.Clientes.Api.Data.Mapping
         public void Configure(EntityTypeBuilder<Cliente> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(c => c.Nome).IsRequired().HasColumnType("varchar(20)");
+            builder.Property(c => c.Nome).IsRequired().HasColumnType("varchar(200)");
             builder.OwnsOne(c => c.Cpf, tf =>
              {
                  tf.Property(c => c.Numero)
@@ -23,7 +23,6 @@ namespace GeekStore.Clientes.Api.Data.Mapping
             {
                 tf.Property(c => c.Endereco)
                 .IsRequired()
-                .HasMaxLength(11)
                 .HasColumnName("Email")
                 .HasColumnType($"varchar({Email.MaxLenght})");
             });

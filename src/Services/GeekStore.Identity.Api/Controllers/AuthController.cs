@@ -1,6 +1,8 @@
 ﻿using Geek.WebApi.Core.Controller;
 using Geek.WebApi.Core.Identidade;
+using GeekStore.Core.Messages.Integration;
 using GeekStore.Identity.Api.Models;
+using GeekStore.MessageBus;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -22,14 +24,15 @@ namespace GeekStore.Identity.Api.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly TokenConfiguration _tokenConfig;
-
+        private readonly IMessageBus _bus;
         public AuthController(SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            IOptions<TokenConfiguration> tokenConfig)
+            IOptions<TokenConfiguration> tokenConfig, IMessageBus bus)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _tokenConfig = tokenConfig.Value;
+            _bus = bus;
         }
 
         [HttpPost("Registrar")]
@@ -45,6 +48,12 @@ namespace GeekStore.Identity.Api.Controllers
             var result = await _userManager.CreateAsync(user, viewModel.Senha);
             if (result.Succeeded)
             {
+                var clienteResult = await RegistrarCliente(viewModel);
+                if (!clienteResult.ValidationResult.IsValid)
+                {
+                    await _userManager.DeleteAsync(user);
+                    return CustomResponse(clienteResult.ValidationResult);
+                }
                 var token = await GerarJwt(viewModel.Email);
                 return CustomResponse(token);
             }
@@ -152,5 +161,21 @@ namespace GeekStore.Identity.Api.Controllers
         private static long ToUnixEpochDate(DateTime date) =>
             (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero))
                 .TotalSeconds);
+
+        private async Task<ResponseMessage> RegistrarCliente(UsuarioRegistroVM usuarioRegistro)
+        {
+            var usuario = await _userManager.FindByEmailAsync(usuarioRegistro.Email);
+            var usuarioRegistrado = new UsuarioRegistradoIntegrationEvent(Guid.Parse(usuario.Id), usuarioRegistro.Nome, usuarioRegistro.Email, usuarioRegistro.Cpf);
+
+            try
+            {
+                return await _bus.RequestAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(usuarioRegistrado);
+            }
+            catch
+            {
+                await _userManager.DeleteAsync(usuario);
+                throw;
+            }
+        }
     }
 }

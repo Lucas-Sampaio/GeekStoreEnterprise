@@ -37,6 +37,7 @@ namespace GeekStore.Clientes.Api
             services.AddJwtConfiguration(Configuration);
             services.AddSwaggerConfiguration();
             services.AddMediatR(typeof(Startup));
+            services.AddMessageBusConfiguration(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

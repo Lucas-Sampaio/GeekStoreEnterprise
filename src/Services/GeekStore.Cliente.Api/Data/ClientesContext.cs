@@ -25,6 +25,7 @@ namespace GeekStore.Clientes.Api.Data
         {
             modelBuilder.Ignore<ValidationResult>();
             modelBuilder.Ignore<Event>();
+
             var propriedades = modelBuilder.Model.GetEntityTypes().SelectMany(x => x.GetProperties().Where(y => y.ClrType == typeof(string)));
             foreach (var property in propriedades)
             {
