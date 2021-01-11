@@ -47,6 +47,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geek.WebApi.Core", "Geek.WebApi.Core\Geek.WebApi.Core.csproj", "{0B861198-E1E6-48A6-B8A7-30B875F9882B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBus", "MessageBus", "{C9CFE59E-1C16-40C6-8A50-BC2537BBFD93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.MessageBus", "src\Building Blocks\GeekStore.MessageBus\GeekStore.MessageBus.csproj", "{93177916-CD3F-48B7-AD02-A1D7AC201B57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +93,10 @@ Global
 		{0B861198-E1E6-48A6-B8A7-30B875F9882B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B861198-E1E6-48A6-B8A7-30B875F9882B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B861198-E1E6-48A6-B8A7-30B875F9882B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93177916-CD3F-48B7-AD02-A1D7AC201B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93177916-CD3F-48B7-AD02-A1D7AC201B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93177916-CD3F-48B7-AD02-A1D7AC201B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93177916-CD3F-48B7-AD02-A1D7AC201B57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,8 @@ Global
 		{B0C4A430-1BBF-424B-9E98-39E455355C99} = {BC7F4BAF-683F-4B9E-B5C5-D627A5EA1F4D}
 		{3C91C833-A18E-4D6B-8925-67E34BE76DBA} = {22D8E2D9-DB33-4F98-8909-0401F3B72100}
 		{0B861198-E1E6-48A6-B8A7-30B875F9882B} = {3C91C833-A18E-4D6B-8925-67E34BE76DBA}
+		{C9CFE59E-1C16-40C6-8A50-BC2537BBFD93} = {22D8E2D9-DB33-4F98-8909-0401F3B72100}
+		{93177916-CD3F-48B7-AD02-A1D7AC201B57} = {C9CFE59E-1C16-40C6-8A50-BC2537BBFD93}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {915C969B-2E42-488F-AFC4-02AFE233EC64}
