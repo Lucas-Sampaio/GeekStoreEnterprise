@@ -1,4 +1,5 @@
-﻿using GeekStore.WebApp.MVC.Extensions;
+﻿using GeekStore.Core.Comunication;
+using GeekStore.WebApp.MVC.Extensions;
 using GeekStore.WebApp.MVC.Models;
 using Microsoft.Extensions.Options;
 using System.Net.Http;

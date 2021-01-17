@@ -6,14 +6,14 @@ namespace GeekStore.WebApp.MVC.Extensions
 {
     public class CarrinhoViewComponent : ViewComponent
     {
-        private readonly ICarrinhoService _carrinhoService;
-        public CarrinhoViewComponent(ICarrinhoService carrinhoService)
+        private readonly ICompraBFFService _carrinhoService;
+        public CarrinhoViewComponent(ICompraBFFService carrinhoService)
         {
             _carrinhoService = carrinhoService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _carrinhoService.ObterCarrinho() ?? new Models.CarrinhoVM());
+            return View(await _carrinhoService.ObterQuantidadeCarrinho());
         }
     }
 }

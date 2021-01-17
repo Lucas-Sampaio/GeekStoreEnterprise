@@ -1,4 +1,6 @@
-﻿namespace GeekStore.WebApp.MVC.Models
+﻿using GeekStore.Core.Comunication;
+
+namespace GeekStore.WebApp.MVC.Models
 {
     public class UsuarioRespostaLogin
     {

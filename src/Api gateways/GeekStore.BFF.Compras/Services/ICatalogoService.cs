@@ -1,6 +1,13 @@
-﻿namespace GeekStore.BFF.Compras.Services
+﻿using GeekStore.BFF.Compras.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace GeekStore.BFF.Compras.Services
 {
-    internal interface ICatalogoService
+    public interface ICatalogoService
     {
+        Task<IEnumerable<ItemProdutoDTO>> ObterTodos();
+        Task<ItemProdutoDTO> ObterPorId(Guid id);
     }
 }

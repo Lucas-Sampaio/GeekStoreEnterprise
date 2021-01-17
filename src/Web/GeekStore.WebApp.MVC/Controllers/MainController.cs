@@ -1,4 +1,4 @@
-﻿using GeekStore.WebApp.MVC.Models;
+﻿using GeekStore.Core.Comunication;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -12,7 +12,7 @@ namespace GeekStore.WebApp.MVC.Controllers
             {
                 foreach (var item in response.Errors.Mensagens)
                 {
-                    ModelState.AddModelError(string.Empty,item);
+                    ModelState.AddModelError(string.Empty, item);
                 }
                 return true;
             }

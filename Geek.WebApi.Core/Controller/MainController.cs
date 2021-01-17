@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using GeekStore.Core.Comunication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
@@ -34,6 +35,12 @@ namespace Geek.WebApi.Core.Controller
 
             return CustomResponse();
         }
+        protected ActionResult CustomResponse(ResponseResult response)
+        {
+            ResponsePossuiErros(response);
+
+            return CustomResponse();
+        }
         protected ActionResult CustomResponse(ValidationResult validationsResult)
         {
             foreach (var item in validationsResult.Errors)
@@ -42,6 +49,16 @@ namespace Geek.WebApi.Core.Controller
             }
 
             return CustomResponse();
+        }
+
+        protected bool ResponsePossuiErros(ResponseResult response)
+        {
+            if (response == null || response.Errors.Mensagens.Any()) return false;
+            foreach (var item in response.Errors.Mensagens)
+            {
+                AdicionarErroProcessamento(item);
+            }
+            return true;
         }
         protected bool OperacaoValida()
         {
