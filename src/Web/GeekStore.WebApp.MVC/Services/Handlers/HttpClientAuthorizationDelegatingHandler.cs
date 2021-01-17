@@ -1,4 +1,5 @@
-﻿using GeekStore.WebApp.MVC.Extensions;
+﻿using Geek.WebApi.Core.Usuario;
+using GeekStore.WebApp.MVC.Extensions;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -8,8 +9,8 @@ namespace GeekStore.WebApp.MVC.Services.Handlers
 {
     public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {
-        private readonly IUser _user;
-        public HttpClientAuthorizationDelegatingHandler(IUser user)
+        private readonly  IAspNetUser _user;
+        public HttpClientAuthorizationDelegatingHandler(IAspNetUser user)
         {
             _user = user;
         }
