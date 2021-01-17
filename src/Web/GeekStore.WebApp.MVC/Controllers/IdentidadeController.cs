@@ -55,10 +55,11 @@ namespace GeekStore.WebApp.MVC.Controllers
 
             return View();
         }
-
+        [Route("sair")]
         public async Task<IActionResult> Logout()
         {
-            return View();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Catalogo");
         }
 
         private async Task RealizarLogin(UsuarioRespostaLogin resposta)
