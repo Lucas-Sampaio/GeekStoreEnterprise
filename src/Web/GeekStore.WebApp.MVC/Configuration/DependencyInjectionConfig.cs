@@ -1,4 +1,4 @@
-﻿using GeekStore.WebApp.MVC.Extensions;
+﻿using Geek.WebApi.Core.Usuario;
 using GeekStore.WebApp.MVC.Extensions.Atributos;
 using GeekStore.WebApp.MVC.Services;
 using GeekStore.WebApp.MVC.Services.Handlers;
@@ -19,25 +19,38 @@ namespace GeekStore.WebApp.MVC.Configuration
         public static IServiceCollection RegisterService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
+
+
+
+            #region HttpServices
+            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
 
-            //services.AddHttpClient<ICatalogoService, CatalogoService>()
-            //   .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-            //  .AddPolicyHandler(retryWaitPolicy);
-
-            services.AddHttpClient("Refit", options =>
-            {
-                options.BaseAddress = new System.Uri(configuration.GetSection("CatalogoUrl").Value);
-            })
+            services.AddHttpClient<ICarrinhoService, CarrinhoService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-                .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>)
                 .AddPolicyHandler(PollyExtensions.EsperarTentar())
-                .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5,TimeSpan.FromSeconds(30)));
-            //o circuit break vale pra todos os usuarios da aplicacao e é acionado quando tem erros consecutivos
+                .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
+            services.AddHttpClient<ICatalogoService, CatalogoService>()
+               .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+               .AddPolicyHandler(PollyExtensions.EsperarTentar())
+               .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+            #endregion
+
+            #region Refit
+            //services.AddHttpClient("Refit", options =>
+            //{
+            //    options.BaseAddress = new System.Uri(configuration.GetSection("CatalogoUrl").Value);
+            //})
+            //   .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+            //   .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>)
+            //   .AddPolicyHandler(PollyExtensions.EsperarTentar())
+            //   .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+            //o circuit break vale pra todos os usuarios da aplicacao e é acionado quando tem erros consecutivos
+            #endregion
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUser, AspNetUser>();
-            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
+
             return services;
         }
     }
