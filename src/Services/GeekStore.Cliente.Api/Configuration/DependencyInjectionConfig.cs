@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GeekStore.Clientes.Api.Configuration
 {
-    public static class DepedencyInjectionConfig
+    public static class DependencyInjectionConfig
     {
         public static void RegisterServices(this IServiceCollection services)
         {

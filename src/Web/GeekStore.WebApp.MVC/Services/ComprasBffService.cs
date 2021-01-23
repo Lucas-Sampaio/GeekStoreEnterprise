@@ -60,9 +60,17 @@ namespace GeekStore.WebApp.MVC.Services
 
         public async Task<int> ObterQuantidadeCarrinho()
         {
-            var response = await _httpClient.GetAsync("api/compras/carrinho-quantidade");
+            var response = await _httpClient.GetAsync("/api/compras/carrinho-quantidade");
             TratarErrosResponse(response);
             return await DeserializarObjetoResponse<int>(response);
+        }
+
+        public async Task<ResponseResult> AplicarVoucherCarrinho(string voucher)
+        {
+            var itemContent = ObterConteudo(voucher);
+            var response = await _httpClient.PostAsync("/api/compras/carrinho/aplicar-voucher",itemContent);
+            if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+            return new ResponseResult();
         }
     }
 }

@@ -55,7 +55,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compras", "Compras", "{0F083636-0614-4AB8-A392-5422B15278FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.BFF.Compras", "src\Api gateways\GeekStore.BFF.Compras\GeekStore.BFF.Compras.csproj", "{67D60D2C-336E-4896-929E-54741C63F48E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.BFF.Compras", "src\Api gateways\GeekStore.BFF.Compras\GeekStore.BFF.Compras.csproj", "{67D60D2C-336E-4896-929E-54741C63F48E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Pedidos.Domain", "src\Services\GeekStore.Pedidos.Domain\GeekStore.Pedidos.Domain.csproj", "{706AFE64-1C84-465F-9B8D-595C9CBDDB8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Pedidos.Infra", "src\Services\GeekStore.Pedidos.Infra\GeekStore.Pedidos.Infra.csproj", "{C8D9DE42-27C3-41C2-8EC7-C6B6F636D4A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +111,14 @@ Global
 		{67D60D2C-336E-4896-929E-54741C63F48E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67D60D2C-336E-4896-929E-54741C63F48E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67D60D2C-336E-4896-929E-54741C63F48E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{706AFE64-1C84-465F-9B8D-595C9CBDDB8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{706AFE64-1C84-465F-9B8D-595C9CBDDB8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{706AFE64-1C84-465F-9B8D-595C9CBDDB8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{706AFE64-1C84-465F-9B8D-595C9CBDDB8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D9DE42-27C3-41C2-8EC7-C6B6F636D4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D9DE42-27C3-41C2-8EC7-C6B6F636D4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D9DE42-27C3-41C2-8EC7-C6B6F636D4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D9DE42-27C3-41C2-8EC7-C6B6F636D4A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +150,8 @@ Global
 		{D82BFE69-9257-4FC6-AB18-64186AA48E0A} = {3DD0C686-BABB-4E44-AA9E-2324E6158152}
 		{0F083636-0614-4AB8-A392-5422B15278FA} = {D82BFE69-9257-4FC6-AB18-64186AA48E0A}
 		{67D60D2C-336E-4896-929E-54741C63F48E} = {0F083636-0614-4AB8-A392-5422B15278FA}
+		{706AFE64-1C84-465F-9B8D-595C9CBDDB8D} = {BC7F4BAF-683F-4B9E-B5C5-D627A5EA1F4D}
+		{C8D9DE42-27C3-41C2-8EC7-C6B6F636D4A2} = {BC7F4BAF-683F-4B9E-B5C5-D627A5EA1F4D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {915C969B-2E42-488F-AFC4-02AFE233EC64}

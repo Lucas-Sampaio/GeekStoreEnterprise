@@ -1,6 +1,11 @@
-﻿namespace GeekStore.BFF.Compras.Services
+﻿using GeekStore.BFF.Compras.Models;
+using System.Threading.Tasks;
+
+namespace GeekStore.BFF.Compras.Services
 {
-    internal interface IPedidoService
+    public interface IPedidoService
     {
+        Task<VoucherDTO> ObterVoucherPorCodigo(string codigo);
     }
+
 }
