@@ -1,5 +1,6 @@
 using Geek.WebApi.Core.Identidade;
 using GeekStore.Pedido.Api.Configuration;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,7 +37,7 @@ namespace GeekStore.Pedido.Api
             services.RegisterServices();
             services.AddJwtConfiguration(Configuration);
             services.AddSwaggerConfiguration();
-            //services.AddMediatR(typeof(Startup));
+            services.AddMediatR(typeof(Startup));
             services.AddMessageBusConfiguration(Configuration);
         }
 

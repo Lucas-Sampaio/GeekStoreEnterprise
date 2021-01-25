@@ -53,10 +53,8 @@ namespace GeekStore.Carrinho.Api.Data
             modelBuilder.Entity<CarrinhoCliente>()
                 .HasMany(c => c.Itens)
                 .WithOne(i => i.CarrinhoCliente)
-                .HasForeignKey(c => c.CarrinhoId);
-
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-                relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
+                .HasForeignKey(c => c.CarrinhoId)
+                .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }

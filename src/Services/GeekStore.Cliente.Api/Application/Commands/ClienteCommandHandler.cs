@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace GeekStore.Clientes.Api.Application.Commands
 {
-    public class ClienteCommandHandler : CommandHandler, IRequestHandler<RegistrarClienteCommand, ValidationResult>
+    public class ClienteCommandHandler : CommandHandler, 
+        IRequestHandler<RegistrarClienteCommand, ValidationResult>,
+        IRequestHandler<AdicionarEnderecoCommand, ValidationResult>
+
     {
         private readonly IClienteRepository _clienteRepository;
         public ClienteCommandHandler(IClienteRepository clienteRepository)
@@ -17,7 +20,7 @@ namespace GeekStore.Clientes.Api.Application.Commands
         }
         public async Task<ValidationResult> Handle(RegistrarClienteCommand request, CancellationToken cancellationToken)
         {
-            if (!request.isValido()) return request.ValidationResult;
+            if (!request.EhValido()) return request.ValidationResult;
 
             var cliente = new Cliente(request.Id, request.Nome, request.Email, request.Cpf);
 
@@ -30,6 +33,16 @@ namespace GeekStore.Clientes.Api.Application.Commands
             }
             _clienteRepository.Adicionar(cliente);
             cliente.AdicionarEvento(new ClienteRegistradoEvent(request.Id, request.Nome, request.Email, request.Cpf));
+            return await PersistirDados(_clienteRepository.UnitOfWork);
+        }
+
+        public async Task<ValidationResult> Handle(AdicionarEnderecoCommand message, CancellationToken cancellationToken)
+        {
+            if (!message.EhValido()) return message.ValidationResult;
+
+            var endereco = new Endereco(message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.Cidade, message.Estado, message.ClienteId);
+            _clienteRepository.AdicionarEndereco(endereco);
+
             return await PersistirDados(_clienteRepository.UnitOfWork);
         }
     }

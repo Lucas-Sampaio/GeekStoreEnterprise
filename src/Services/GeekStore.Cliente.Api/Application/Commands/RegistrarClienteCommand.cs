@@ -9,7 +9,7 @@ namespace GeekStore.Clientes.Api.Application.Commands
     {
         public RegistrarClienteCommand(Guid id, string nome, string email, string cpf)
         {
-            AgregateId = id;
+            AggregateId = id;
             Id = id;
             Nome = nome;
             Email = email;
@@ -21,7 +21,7 @@ namespace GeekStore.Clientes.Api.Application.Commands
         public string Email { get; private set; }
         public string Cpf { get; private set; }
 
-        public override bool isValido()
+        public override bool EhValido()
         {
             ValidationResult = new RegistrarClienteValidation().Validate(this);
 

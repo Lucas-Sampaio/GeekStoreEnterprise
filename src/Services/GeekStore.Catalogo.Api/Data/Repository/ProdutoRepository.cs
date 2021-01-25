@@ -3,6 +3,7 @@ using GeekStore.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GeekStore.Catalogo.Api.Data.Repository
@@ -39,6 +40,19 @@ namespace GeekStore.Catalogo.Api.Data.Repository
         public void Dispose()
         {
             _context.Dispose();
+        }
+
+        public async Task<List<Produto>> ObterProdutosPorId(string ids)
+        {
+            var idsGuid = ids.Split(',')
+              .Select(id => (Ok: Guid.TryParse(id, out var x), Value: x));
+
+            if (!idsGuid.All(nid => nid.Ok)) return new List<Produto>();
+
+            var idsValue = idsGuid.Select(id => id.Value);
+
+            return await _context.Produtos.AsNoTracking()
+                .Where(p => idsValue.Contains(p.Id) && p.Ativo).ToListAsync();
         }
     }
 }

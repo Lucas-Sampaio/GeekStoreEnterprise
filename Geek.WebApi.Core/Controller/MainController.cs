@@ -70,7 +70,7 @@ namespace Geek.WebApi.Core.Controller
             Erros.Add(erro);
         }
 
-        protected void LimparErrosProcessamneto()
+        protected void LimparErrosProcessamento()
         {
             Erros.Clear();
         }

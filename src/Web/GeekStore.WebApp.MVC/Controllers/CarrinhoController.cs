@@ -8,9 +8,9 @@ namespace GeekStore.WebApp.MVC.Controllers
 {
     public class CarrinhoController : MainController
     {
-        private readonly ICompraBFFService _comprasBffService;
+        private readonly IComprasBffService _comprasBffService;
 
-        public CarrinhoController(ICompraBFFService carrinhoService)
+        public CarrinhoController(IComprasBffService carrinhoService)
         {
             _comprasBffService = carrinhoService;
         }

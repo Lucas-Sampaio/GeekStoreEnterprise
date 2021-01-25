@@ -20,7 +20,7 @@ namespace GeekStore.Core.Messages
         {
             if (!await uow.Commit())
             {
-                AdicionarErro("Houve um erro ao cadastrar cliente");
+                AdicionarErro("Houve um erro ao persistir dado");
             }
             return ValidationResult;
         }

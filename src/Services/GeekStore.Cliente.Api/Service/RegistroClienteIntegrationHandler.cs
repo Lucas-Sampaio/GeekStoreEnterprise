@@ -21,7 +21,7 @@ namespace GeekStore.Clientes.Api.Service
         }
         private void SetResponder()
         {
-            _bus.RespondAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(request => RegistrarCliente(request));
+            _bus.RespondAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(async request => await RegistrarCliente(request));
             _bus.AdvancedBus.Connected += OnConnect;
         }
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -34,12 +34,12 @@ namespace GeekStore.Clientes.Api.Service
         {
             SetResponder();
         }
-        private ResponseMessage RegistrarCliente(UsuarioRegistradoIntegrationEvent message)
+        private async Task<ResponseMessage> RegistrarCliente(UsuarioRegistradoIntegrationEvent message)
         {
             var clienteCommand = new RegistrarClienteCommand(message.Id, message.Nome, message.Email, message.Cpf);
             using var scope = _serviceProvider.CreateScope();
             var mediator = scope.ServiceProvider.GetRequiredService<IMediatorHandler>();
-            var sucesso = mediator.EnviarComando(clienteCommand).Result;
+            var sucesso = await mediator.EnviarComando(clienteCommand);
             return new ResponseMessage(sucesso);
         }
     }

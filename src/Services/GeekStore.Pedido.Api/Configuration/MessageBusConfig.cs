@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GeekStore.Core.Utils;
+using GeekStore.MessageBus;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GeekStore.Pedido.Api.Configuration
@@ -7,8 +9,8 @@ namespace GeekStore.Pedido.Api.Configuration
     {
         public static void AddMessageBusConfiguration(this IServiceCollection services, IConfiguration config)
         {
-            //services.AddMessageBus(config.GetMessageQueueConnection("MessageBus"))
-            //         .AddHostedService<RegistroClienteIntegrationHandler>();
+            services.AddMessageBus(config.GetMessageQueueConnection("MessageBus"));
+                    
         }
     }
 }

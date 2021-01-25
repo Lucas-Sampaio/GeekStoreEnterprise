@@ -9,5 +9,6 @@ namespace GeekStore.BFF.Compras.Services
     {
         Task<IEnumerable<ItemProdutoDTO>> ObterTodos();
         Task<ItemProdutoDTO> ObterPorId(Guid id);
+        Task<IEnumerable<ItemProdutoDTO>> ObterItens(IEnumerable<Guid> ids);
     }
 }

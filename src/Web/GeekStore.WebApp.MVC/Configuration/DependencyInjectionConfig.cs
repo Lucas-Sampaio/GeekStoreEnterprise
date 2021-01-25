@@ -26,7 +26,7 @@ namespace GeekStore.WebApp.MVC.Configuration
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
 
-            services.AddHttpClient<ICompraBFFService, ComprasBffService>()
+            services.AddHttpClient<IComprasBffService, ComprasBffService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.EsperarTentar())
                 .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
@@ -35,6 +35,12 @@ namespace GeekStore.WebApp.MVC.Configuration
                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                .AddPolicyHandler(PollyExtensions.EsperarTentar())
                .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<IClienteService, ClienteService>()
+               .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+               .AddPolicyHandler(PollyExtensions.EsperarTentar())
+               .AddTransientHttpErrorPolicy(
+                   p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
             #endregion
 
             #region Refit

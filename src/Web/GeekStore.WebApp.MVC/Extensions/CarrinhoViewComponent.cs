@@ -6,8 +6,8 @@ namespace GeekStore.WebApp.MVC.Extensions
 {
     public class CarrinhoViewComponent : ViewComponent
     {
-        private readonly ICompraBFFService _carrinhoService;
-        public CarrinhoViewComponent(ICompraBFFService carrinhoService)
+        private readonly IComprasBffService _carrinhoService;
+        public CarrinhoViewComponent(IComprasBffService carrinhoService)
         {
             _carrinhoService = carrinhoService;
         }

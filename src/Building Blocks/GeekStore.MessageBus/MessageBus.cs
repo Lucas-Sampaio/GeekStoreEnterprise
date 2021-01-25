@@ -83,7 +83,7 @@ namespace GeekStore.MessageBus
 
         }
 
-        public IDisposable RespondAsync<TRequest, TResponse>(Func<TRequest, TResponse> responder)
+        public IDisposable RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> responder)
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage
         {

@@ -38,6 +38,8 @@ namespace GeekStore.Carrinho.Api
             services.AddSwaggerConfiguration();
 
             services.RegisterServices();
+
+            services.AddMessageBusConfiguration(Configuration);
      
         }
 

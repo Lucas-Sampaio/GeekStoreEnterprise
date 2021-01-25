@@ -18,6 +18,17 @@ namespace GeekStore.BFF.Compras.Services
             _httpClient.BaseAddress = new Uri(settings.Value.CatalogoUrl);
         }
 
+        public async Task<IEnumerable<ItemProdutoDTO>> ObterItens(IEnumerable<Guid> ids)
+        {
+            var idsRequest = string.Join(",", ids);
+
+            var response = await _httpClient.GetAsync($"/api/catalogo/produtos/lista/{idsRequest}/");
+
+            TratarErrosResponse(response);
+
+            return await DeserializarObjetoResponse<IEnumerable<ItemProdutoDTO>>(response);
+        }
+
         public async Task<ItemProdutoDTO> ObterPorId(Guid id)
         {
             var response = await _httpClient.GetAsync($"/api/Catalogo/produtos/{id}");

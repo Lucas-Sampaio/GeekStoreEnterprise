@@ -12,7 +12,7 @@ namespace GeekStore.Core.Messages
         {
             Timestamp = DateTime.Now;
         }
-        public virtual bool isValido()
+        public virtual bool EhValido()
         {
             throw new NotImplementedException();
         }

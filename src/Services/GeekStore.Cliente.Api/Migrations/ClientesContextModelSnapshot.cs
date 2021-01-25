@@ -17,7 +17,7 @@ namespace GeekStore.Clientes.Api.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("GeekStore.Clientes.Api.Models.Cliente", b =>
                 {
@@ -40,6 +40,7 @@ namespace GeekStore.Clientes.Api.Migrations
             modelBuilder.Entity("GeekStore.Clientes.Api.Models.Endereco", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Bairro")
@@ -53,6 +54,9 @@ namespace GeekStore.Clientes.Api.Migrations
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
+
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(250)");
@@ -70,6 +74,9 @@ namespace GeekStore.Clientes.Api.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClienteId")
+                        .IsUnique();
 
                     b.ToTable("Enderecos");
                 });
@@ -122,7 +129,7 @@ namespace GeekStore.Clientes.Api.Migrations
                 {
                     b.HasOne("GeekStore.Clientes.Api.Models.Cliente", "Cliente")
                         .WithOne("Endereco")
-                        .HasForeignKey("GeekStore.Clientes.Api.Models.Endereco", "Id")
+                        .HasForeignKey("GeekStore.Clientes.Api.Models.Endereco", "ClienteId")
                         .IsRequired();
 
                     b.Navigation("Cliente");

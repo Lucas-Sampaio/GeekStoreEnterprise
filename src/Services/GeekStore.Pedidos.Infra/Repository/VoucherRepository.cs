@@ -21,7 +21,7 @@ namespace GeekStore.Pedidos.Infra.Repository
 
         public void Atualizar(Voucher voucher)
         {
-            throw new NotImplementedException();
+            _context.Vouchers.Update(voucher);
         }
 
         public async Task<Voucher> ObterVoucherPorCodigo(string codigo)

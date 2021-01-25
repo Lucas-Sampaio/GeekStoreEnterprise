@@ -115,6 +115,7 @@ namespace GeekStore.Carrinho.Api.Migrations
                     b.HasOne("GeekStore.Carrinho.Api.Model.CarrinhoCliente", "CarrinhoCliente")
                         .WithMany("Itens")
                         .HasForeignKey("CarrinhoId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CarrinhoCliente");
