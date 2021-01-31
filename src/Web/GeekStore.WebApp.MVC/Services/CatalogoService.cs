@@ -24,11 +24,11 @@ namespace GeekStore.WebApp.MVC.Services
             return await DeserializarObjetoResponse<ProdutoVM>(response);
         }
 
-        public async Task<IEnumerable<ProdutoVM>> ObterTodos()
+        public async Task<PagedViewModel<ProdutoVM>> ObterTodos(int pageSize, int pageIndex, string query = null)
         {
-            var response = await _httpClient.GetAsync("/api/Catalogo/produtos");
+            var response = await _httpClient.GetAsync($"/api/catalogo/produtos?pageSize={pageSize}&page={pageIndex}&q={query}");
             TratarErrosResponse(response);
-            return await DeserializarObjetoResponse<IEnumerable<ProdutoVM>>(response);
+            return await DeserializarObjetoResponse<PagedViewModel<ProdutoVM>>(response);
         }
     }
 }

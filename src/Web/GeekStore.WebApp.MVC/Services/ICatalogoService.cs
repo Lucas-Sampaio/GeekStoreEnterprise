@@ -8,7 +8,7 @@ namespace GeekStore.WebApp.MVC.Services
 {
     public interface ICatalogoService
     {
-        Task<IEnumerable<ProdutoVM>> ObterTodos();
+        Task<PagedViewModel<ProdutoVM>> ObterTodos(int pageSize, int pageIndex, string query = null);
         Task<ProdutoVM> ObterPorId(Guid id);
     }
     public interface ICatalogoServiceRefit

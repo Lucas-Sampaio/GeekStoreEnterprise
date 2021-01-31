@@ -19,14 +19,14 @@ namespace GeekStore.Catalogo.Api.Controllers
             _produtoRepository = produtoRepository;
         }
 
-        [AllowAnonymous]
+      
         [HttpGet("produtos")]
-        public async Task<IEnumerable<Produto>> Index()
+        public async Task<PagedResult<Produto>> Index([FromQuery] int pageSize = 8, [FromQuery] int page = 1, [FromQuery] string q = null)
         {
-            return await _produtoRepository.ObterTodos();
+            return await _produtoRepository.ObterTodos(pageSize,page,q);
         }
 
-        [ClaimsAuthorize("Catalogo", "Ler")]
+        //[ClaimsAuthorize("Catalogo", "Ler")]
         [HttpGet("produtos/{id}")]
         public async Task<Produto> ProdutoDetalhe(Guid id)
         {
