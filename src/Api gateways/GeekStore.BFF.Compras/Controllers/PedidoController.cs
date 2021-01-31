@@ -41,8 +41,8 @@ namespace GeekStore.BFF.Compras.Controllers
             if (!await ValidarCarrinhoProdutos(carrinho, produtos)) return CustomResponse();
 
             PopularDadosPedido(carrinho, endereco, pedido);
-
-            return CustomResponse(await _pedidoService.FinalizarPedido(pedido));
+            var pedidoFinalizado = await _pedidoService.FinalizarPedido(pedido);
+            return CustomResponse(pedidoFinalizado);
         }
 
         [HttpGet("compras/pedido/ultimo")]

@@ -46,17 +46,19 @@ namespace GeekStore.Pagamentos.Api.Services
         //metodo de quando o pedido é realizado
        private async Task<ResponseMessage> AutorizarPagamento(PedidoIniciadoIntegrationEvent message)
         {
-            ResponseMessage response;
             using var scope = _serviceProvider.CreateScope();
             var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
-            var pagamento = new Pagamento()
+            var pagamento = new Pagamento
             {
                 PedidoId = message.PedidoId,
                 TipoPagamento = (ETipoPagamento)message.TipoPagamento,
                 Valor = message.Valor,
-                CartaoCredito = new CartaoCredito(message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
+                CartaoCredito = new CartaoCredito(
+                    message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
             };
-            response = await pagamentoService.AutorizarPagamento(pagamento);
+
+            var response = await pagamentoService.AutorizarPagamento(pagamento);
+
             return response;
         }
         //evento recebido do catalogo dps de conferir estoque

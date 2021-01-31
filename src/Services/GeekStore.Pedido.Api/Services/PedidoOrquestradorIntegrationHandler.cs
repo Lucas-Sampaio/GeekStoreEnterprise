@@ -31,7 +31,7 @@ namespace GeekStore.Pedido.Api.Services
             _logger.LogInformation("Serviço de pedidos iniciado.");
 
             _timer = new Timer(ProcessarPedidos, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(15));
+                TimeSpan.FromSeconds(120));
 
             return Task.CompletedTask;
         }

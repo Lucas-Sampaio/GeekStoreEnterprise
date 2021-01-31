@@ -14,7 +14,7 @@ namespace GeekStore.Core.Messages
         }
         protected void AdicionarErro(string mensagem)
         {
-            ValidationResult.Errors.Add(new ValidationFailure("", mensagem));
+            ValidationResult.Errors.Add(new ValidationFailure(string.Empty, mensagem));
         }
         protected async Task<ValidationResult> PersistirDados(IUnitOfWork uow)
         {

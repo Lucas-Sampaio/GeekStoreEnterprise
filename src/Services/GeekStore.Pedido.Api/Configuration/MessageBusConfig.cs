@@ -11,8 +11,8 @@ namespace GeekStore.Pedido.Api.Configuration
         public static void AddMessageBusConfiguration(this IServiceCollection services, IConfiguration config)
         {
             services.AddMessageBus(config.GetMessageQueueConnection("MessageBus"))
-                .AddHostedService<PedidoOrquestradorIntegrationHandler>();
-                    
+                .AddHostedService<PedidoOrquestradorIntegrationHandler>()
+                .AddHostedService<PedidoIntegrationHandler>();
         }
     }
 }

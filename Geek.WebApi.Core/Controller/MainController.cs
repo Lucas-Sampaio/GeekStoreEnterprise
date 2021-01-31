@@ -53,7 +53,7 @@ namespace Geek.WebApi.Core.Controller
 
         protected bool ResponsePossuiErros(ResponseResult response)
         {
-            if (response == null || response.Errors.Mensagens.Any()) return false;
+            if (response == null || !response.Errors.Mensagens.Any()) return false;
             foreach (var item in response.Errors.Mensagens)
             {
                 AdicionarErroProcessamento(item);
