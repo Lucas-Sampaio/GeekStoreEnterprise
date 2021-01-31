@@ -51,6 +51,11 @@ namespace Geek.WebApi.Core.Usuario
         {
             return _accessor.HttpContext;
         }
+
+        public string ObterUserRefreshToken()
+        {
+            return EstaAutenticado() ? _accessor.HttpContext.User.GetUserRefreshToken() : "";
+        }
     }
 
     public static class ClaimsPrincipalExtensions
@@ -82,6 +87,16 @@ namespace Geek.WebApi.Core.Usuario
                 throw new ArgumentException(nameof(principal));
             }
             var claim = principal.FindFirst("JWT");
+            return claim?.Value;
+        }
+        public static string GetUserRefreshToken(this ClaimsPrincipal principal)
+        {
+            if (principal == null)
+            {
+                throw new ArgumentException(nameof(principal));
+            }
+
+            var claim = principal.FindFirst("RefreshToken");
             return claim?.Value;
         }
     }

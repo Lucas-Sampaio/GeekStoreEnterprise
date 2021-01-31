@@ -7,5 +7,11 @@ namespace GeekStore.WebApp.MVC.Services
     {
         Task<UsuarioRespostaLogin> Login(UsuarioLoginVM usuarioLogin);
         Task<UsuarioRespostaLogin> Registro(UsuarioRegistroVM usuarioRegistro);
+        Task RealizarLogin(UsuarioRespostaLogin resposta);
+        Task Logout();
+
+        bool TokenExpirado();
+
+        Task<bool> RefreshTokenValido();
     }
 }

@@ -19,11 +19,12 @@ namespace GeekStore.WebApp.MVC.Configuration
         public static IServiceCollection RegisterService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
-
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
 
             #region HttpServices
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
 
             services.AddHttpClient<IComprasBffService, ComprasBffService>()
@@ -54,9 +55,7 @@ namespace GeekStore.WebApp.MVC.Configuration
             //   .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
             //o circuit break vale pra todos os usuarios da aplicacao e é acionado quando tem erros consecutivos
             #endregion
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IAspNetUser, AspNetUser>();
-
+        
             return services;
         }
     }
