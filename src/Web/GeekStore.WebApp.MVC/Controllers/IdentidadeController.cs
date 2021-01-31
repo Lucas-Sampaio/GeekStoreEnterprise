@@ -29,7 +29,7 @@ namespace GeekStore.WebApp.MVC.Controllers
             var resposta = await _autenticacaoService.Registro(model);
             if (ResponsePossuiErros(resposta.ErroResult)) return View(model);
             await RealizarLogin(resposta);
-            return View();
+            return RedirectToAction("Index", "Catalogo");
         }
       
         [Route("login")]
@@ -53,7 +53,7 @@ namespace GeekStore.WebApp.MVC.Controllers
 
             if (!string.IsNullOrWhiteSpace(returnUrl)) return LocalRedirect(returnUrl);
 
-            return View();
+            return RedirectToAction("Index", "Catalogo");
         }
         [Route("sair")]
         public async Task<IActionResult> Logout()
