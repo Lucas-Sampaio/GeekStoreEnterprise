@@ -1,5 +1,6 @@
 ﻿using Geek.WebApi.Core.Identidade;
 using GeekStore.Carrinho.Api.Data;
+using GeekStore.Carrinho.Api.Services.gRPC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace GeekStore.Carrinho.Api.Configuration
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
-
+            services.AddGrpc();
             services.AddCors(options =>
             {
                 options.AddPolicy("Total",
@@ -47,6 +48,7 @@ namespace GeekStore.Carrinho.Api.Configuration
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<CarrinhoGrpcService>().RequireCors("Total");
             });
         }
     }
