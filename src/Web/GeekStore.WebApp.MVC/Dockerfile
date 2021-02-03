@@ -7,10 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["src/Web/GeekStore.WebApp.MVC/GeekStore.WebApp.MVC.csproj", "src/Web/GeekStore.WebApp.MVC/"]
-RUN dotnet restore "src/Web/GeekStore.WebApp.MVC/GeekStore.WebApp.MVC.csproj"
+COPY ["./Web/GeekStore.WebApp.MVC/GeekStore.WebApp.MVC.csproj", "Web/GeekStore.WebApp.MVC/"]
+COPY ["./Building Blocks/GeekStore.Core/GeekStore.Core.csproj", "Building Blocks/GeekStore.Core/"]
+COPY ["./Building Blocks/Geek.WebApi.Core/Geek.WebApi.Core.csproj", "Building Blocks/Geek.WebApi.Core/"]
+RUN dotnet restore "Web/GeekStore.WebApp.MVC/GeekStore.WebApp.MVC.csproj"
 COPY . .
-WORKDIR "/src/src/Web/GeekStore.WebApp.MVC"
+WORKDIR "Web/GeekStore.WebApp.MVC"
 RUN dotnet build "GeekStore.WebApp.MVC.csproj" -c Release -o /app/build
 
 FROM build AS publish
