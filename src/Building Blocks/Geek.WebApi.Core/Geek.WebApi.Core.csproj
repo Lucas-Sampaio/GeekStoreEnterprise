@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Building Blocks\GeekStore.Core\GeekStore.Core.csproj" />
+    <ProjectReference Include="..\GeekStore.Core\GeekStore.Core.csproj" />
   </ItemGroup>
 
 </Project>
