@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Geek.WebApi.Core\Geek.WebApi.Core.csproj" />
+    <ProjectReference Include="..\..\Building Blocks\Geek.WebApi.Core\Geek.WebApi.Core.csproj" />
     <ProjectReference Include="..\..\Building Blocks\GeekStore.Core\GeekStore.Core.csproj" />
     <ProjectReference Include="..\..\Building Blocks\GeekStore.MessageBus\GeekStore.MessageBus.csproj" />
     <ProjectReference Include="..\GeekStore.Pedidos.Domain\GeekStore.Pedidos.Domain.csproj" />

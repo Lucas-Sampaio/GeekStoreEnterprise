@@ -7,10 +7,15 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["src/Services/GeekStore.Pedido.Api/GeekStore.Pedido.Api.csproj", "src/Services/GeekStore.Pedido.Api/"]
-RUN dotnet restore "src/Services/GeekStore.Pedido.Api/GeekStore.Pedido.Api.csproj"
+COPY ["./Services/GeekStore.Pedido.Api/GeekStore.Pedido.Api.csproj", "Services/GeekStore.Pedido.Api/"]
+COPY ["./Services/GeekStore.Pedidos.Infra/GeekStore.Pedidos.Infra.csproj", "Services/GeekStore.Pedidos.Infra/"]
+COPY ["./Building Blocks/GeekStore.Core/GeekStore.Core.csproj", "Building Blocks/GeekStore.Core/"]
+COPY ["./Services/GeekStore.Pedidos.Domain/GeekStore.Pedidos.Domain.csproj", "Services/GeekStore.Pedidos.Domain/"]
+COPY ["./Building Blocks/Geek.WebApi.Core/Geek.WebApi.Core.csproj", "Building Blocks/Geek.WebApi.Core/"]
+COPY ["./Building Blocks/GeekStore.MessageBus/GeekStore.MessageBus.csproj", "Building Blocks/GeekStore.MessageBus/"]
+RUN dotnet restore "Services/GeekStore.Pedido.Api/GeekStore.Pedido.Api.csproj"
 COPY . .
-WORKDIR "/src/src/Services/GeekStore.Pedido.Api"
+WORKDIR "Services/GeekStore.Pedido.Api"
 RUN dotnet build "GeekStore.Pedido.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
