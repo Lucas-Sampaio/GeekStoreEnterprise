@@ -52,7 +52,7 @@ services:
         container_name: geekstore-api-carrinho
         build: 
             context: ../src
-            dockerfile: ./Services/geekstore.Carrinho.Api/Dockerfile               
+            dockerfile: ./Services/GeekStore.Carrinho.Api/Dockerfile               
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=https://+:5201;http://+5202          
@@ -133,12 +133,13 @@ services:
             - sql-server
             - api-identidade   
      
-     geekstore-server:
+    geekstore-server:
         image: lucas29/geekstore-server:latest
         container_name: geekstore-server    
         build: 
             context: ./
             dockerfile: ./nginx/Dockerfile 
+            
         ports:
             - "80:80"
             - "443:443"
