@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["src/Services/GeekStore.Carrinho.Api/GeekStore.Carrinho.Api.csproj", "src/Services/GeekStore.Carrinho.Api/"]
-RUN dotnet restore "src/Services/GeekStore.Carrinho.Api/GeekStore.Carrinho.Api.csproj"
+COPY ["./Services/GeekStore.Carrinho.Api/GeekStore.Carrinho.Api.csproj", "Services/GeekStore.Carrinho.Api/"]
+COPY ["./Building Blocks/GeekStore.Core/GeekStore.Core.csproj", "Building Blocks/GeekStore.Core/"]
+COPY ["./Building Blocks/Geek.WebApi.Core/Geek.WebApi.Core.csproj", "Building Blocks/Geek.WebApi.Core/"]
+COPY ["./Building Blocks/GeekStore.MessageBus/GeekStore.MessageBus.csproj", "Building Blocks/GeekStore.MessageBus/"]
+RUN dotnet restore "Services/GeekStore.Carrinho.Api/GeekStore.Carrinho.Api.csproj"
 COPY . .
-WORKDIR "/src/src/Services/GeekStore.Carrinho.Api"
+WORKDIR "Services/GeekStore.Carrinho.Api"
 RUN dotnet build "GeekStore.Carrinho.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
