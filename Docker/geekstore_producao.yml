@@ -31,6 +31,8 @@ services:
         depends_on:
             - api-catalogo
             - api-identidade
+            - api-cliente
+            - api-bff-compras
                  
     api-identidade:
         image: lucas29/geekstore-api-identidade:latest
@@ -41,7 +43,8 @@ services:
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=https://+:5101;http://+5102         
-    
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=geekstore
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/geekstore-certificate.pfx
         depends_on:
             - rabbitmq
             - sql-server 
@@ -55,7 +58,9 @@ services:
             dockerfile: ./Services/GeekStore.Carrinho.Api/Dockerfile               
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
-            - ASPNETCORE_URLS=https://+:5201;http://+5202          
+            - ASPNETCORE_URLS=https://+:5201;http://+5202    
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=geekstore
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/geekstore-certificate.pfx            
         depends_on:
             - rabbitmq
             - api-identidade
@@ -70,6 +75,8 @@ services:
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=http://*:5301
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=geekstore
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/geekstore-certificate.pfx
         depends_on:
             - rabbitmq    
             
@@ -81,7 +88,9 @@ services:
             dockerfile: ./Services/GeekStore.Cliente.Api/Dockerfile  
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
-            - ASPNETCORE_URLS=https://+:5401;http://+5402    
+            - ASPNETCORE_URLS=https://+:5401;http://+5402 
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=geekstore
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/geekstore-certificate.pfx
         depends_on:
             - rabbitmq
             - api-identidade
@@ -97,6 +106,8 @@ services:
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=https://+:5501;http://+5502   
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=geekstore
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/geekstore-certificate.pfx
         depends_on:
             - rabbitmq
             - api-identidade
@@ -113,6 +124,8 @@ services:
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=https://+:5601;http://+5602
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=geekstore
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/geekstore-certificate.pfx
         depends_on:
             - rabbitmq
             - api-identidade
@@ -128,6 +141,8 @@ services:
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=https://+:5701;http://+5702
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=geekstore
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/geekstore-certificate.pfx
         depends_on:
             - rabbitmq
             - sql-server
@@ -141,7 +156,7 @@ services:
             dockerfile: ./nginx/Dockerfile 
             
         ports:
-            - "80:80"
+            - "81:80"
             - "443:443"
         depends_on:
             - web-mvc
