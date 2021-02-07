@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["src/Services/GeekStore.Identity.Api/GeekStore.Identity.Api.csproj", "src/Services/GeekStore.Identity.Api/"]
-RUN dotnet restore "src/Services/GeekStore.Identity.Api/GeekStore.Identity.Api.csproj"
+COPY ["./Services/GeekStore.Identity.Api/GeekStore.Identity.Api.csproj", "Services/GeekStore.Identity.Api/"]
+COPY ["./Building Blocks/GeekStore.Core/GeekStore.Core.csproj", "Building Blocks/GeekStore.Core/"]
+COPY ["./Building Blocks/Geek.WebApi.Core/Geek.WebApi.Core.csproj", "Building Blocks/Geek.WebApi.Core/"]
+COPY ["./Building Blocks/GeekStore.MessageBus/GeekStore.MessageBus.csproj", "Building Blocks/GeekStore.MessageBus/"]
+RUN dotnet restore "Services/GeekStore.Identity.Api/GeekStore.Identity.Api.csproj"
 COPY . .
-WORKDIR "/src/src/Services/GeekStore.Identity.Api"
+WORKDIR "Services/GeekStore.Identity.Api"
 RUN dotnet build "GeekStore.Identity.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
