@@ -2,15 +2,145 @@ version: "3"
 
 services: 
 
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbit-geekstore
+        environment:
+            RABBITMQ_DEFAULT_USER: "geekstore"
+            RABBITMQ_DEFAULT_PASS: "geekstore"
+            
+    sql-server:
+        image: lucas29/geekstore-sql-server:latest
+        container_name: geekstore-sql-server
+        build: 
+            context: ../sql
+            dockerfile: ./Dockerfile
+        environment:
+            SA_PASSWORD: "MeuDB@123"
+            ACCEPT_EULA: "Y" 
+            
     web-mvc:
-        image: geekstore-web-mvc-ecommerce:latest
+        image: lucas29/geekstore-web-mvc-ecommerce:latest
         container_name: geekstore-web-mvc-ecommerce
         build:
             context: ../src
-            dockerfile: ./Web/GeekStore.WebApp.MVC/Dockerfile
-        ports:
-             - "5001:5001"
+            dockerfile: ./Web/GeekStore.WebApp.MVC/Dockerfile    
         environment:
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=http://*:5001
+        depends_on:
+            - api-catalogo
+            - api-identidade
+                 
+    api-identidade:
+        image: lucas29/geekstore-api-identidade:latest
+        container_name: geekstore-api-identidade    
+        build: 
+            context: ../src
+            dockerfile: ./Services/GeekStore.Identity.Api/Dockerfile    
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:5101;http://+5102         
+    
+        depends_on:
+            - rabbitmq
+            - sql-server 
+         
+         
+    api-carrinho:
+        image: lucas29/geekstore-api-carrinho:latest
+        container_name: geekstore-api-carrinho
+        build: 
+            context: ../src
+            dockerfile: ./Services/geekstore.Carrinho.Api/Dockerfile               
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:5201;http://+5202          
+        depends_on:
+            - rabbitmq
+            - api-identidade
+            - sql-server      
+         
+    api-catalogo:
+        image: lucas29/geekstore-api-catalogo:latest
+        container_name: geekstore-api-catalogo
+        build: 
+            context: ../src
+            dockerfile: ./Services/GeekStore.Catalogo.Api/Dockerfile
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=http://*:5301
+        depends_on:
+            - rabbitmq    
+            
+    api-cliente:
+        image: lucas29/geekstore-api-cliente:latest
+        container_name: geekstore-api-cliente    
+        build: 
+            context: ../src
+            dockerfile: ./Services/GeekStore.Cliente.Api/Dockerfile  
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:5401;http://+5402    
+        depends_on:
+            - rabbitmq
+            - api-identidade
+            - sql-server  
+
+    api-bff-compras:
+        image: lucas29/geekstore-api-bff-compras:latest
+        container_name: geekstore-api-bff-compras
+        build: 
+            context: ../src
+            dockerfile: ./Api gateways/GeekStore.BFF.Compras/Dockerfile  
+        restart: always 
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:5501;http://+5502   
+        depends_on:
+            - rabbitmq
+            - api-identidade
+            - api-carrinho
+            - api-pagamento
+            - api-pedido
+            
+    api-pagamento:
+        image: lucas29/geekstore-api-pagamento:latest
+        container_name: geekstore-api-pagamento    
+        build: 
+            context: ../src
+            dockerfile: ./Services/GeekStore.Pagamento.Api/Dockerfile
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:5601;http://+5602
+        depends_on:
+            - rabbitmq
+            - api-identidade
+            - api-pedido
+            - sql-server
+            
+    api-pedido:
+        image: lucas29/geekstore-api-pedido:latest
+        container_name: geekstore-api-pedido    
+        build: 
+            context: ../src
+            dockerfile: ./Services/GeekStore.Pedido.Api/Dockerfile 
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:5701;http://+5702
+        depends_on:
+            - rabbitmq
+            - sql-server
+            - api-identidade   
      
+     geekstore-server:
+        image: lucas29/geekstore-server:latest
+        container_name: geekstore-server    
+        build: 
+            context: ./
+            dockerfile: ./nginx/Dockerfile 
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - web-mvc
