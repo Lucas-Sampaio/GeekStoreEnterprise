@@ -1,4 +1,5 @@
-﻿using Geek.WebApi.Core.Usuario;
+﻿using Geek.WebApi.Core.Extensions;
+using Geek.WebApi.Core.Usuario;
 using GeekStore.WebApp.MVC.Extensions.Atributos;
 using GeekStore.WebApp.MVC.Services;
 using GeekStore.WebApp.MVC.Services.Handlers;
@@ -25,20 +26,24 @@ namespace GeekStore.WebApp.MVC.Configuration
             #region HttpServices
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
-            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
+            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>()
+                .AllowSelfSignedCertificate();
 
             services.AddHttpClient<IComprasBffService, ComprasBffService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AllowSelfSignedCertificate()
                 .AddPolicyHandler(PollyExtensions.EsperarTentar())
                 .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICatalogoService, CatalogoService>()
                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+               .AllowSelfSignedCertificate()
                .AddPolicyHandler(PollyExtensions.EsperarTentar())
                .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IClienteService, ClienteService>()
                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+               .AllowSelfSignedCertificate()
                .AddPolicyHandler(PollyExtensions.EsperarTentar())
                .AddTransientHttpErrorPolicy(
                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
@@ -55,7 +60,7 @@ namespace GeekStore.WebApp.MVC.Configuration
             //   .AddTransientHttpErrorPolicy(x => x.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
             //o circuit break vale pra todos os usuarios da aplicacao e é acionado quando tem erros consecutivos
             #endregion
-        
+
             return services;
         }
     }
