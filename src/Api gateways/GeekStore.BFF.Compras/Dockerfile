@@ -1,16 +1,19 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["src/Api gateways/GeekStore.BFF.Compras/GeekStore.BFF.Compras.csproj", "src/Api gateways/GeekStore.BFF.Compras/"]
-RUN dotnet restore "src/Api gateways/GeekStore.BFF.Compras/GeekStore.BFF.Compras.csproj"
+COPY ["./Api gateways/GeekStore.BFF.Compras/GeekStore.BFF.Compras.csproj", "Api gateways/GeekStore.BFF.Compras/"]
+COPY ["./Building Blocks/GeekStore.Core/GeekStore.Core.csproj", "Building Blocks/GeekStore.Core/"]
+COPY ["./Building Blocks/Geek.WebApi.Core/Geek.WebApi.Core.csproj", "Building Blocks/Geek.WebApi.Core/"]
+COPY ["./Building Blocks/GeekStore.MessageBus/GeekStore.MessageBus.csproj", "Building Blocks/GeekStore.MessageBus/"]
+RUN dotnet restore "Api gateways/GeekStore.BFF.Compras/GeekStore.BFF.Compras.csproj"
 COPY . .
-WORKDIR "/src/src/Api gateways/GeekStore.BFF.Compras"
+WORKDIR "Api gateways/GeekStore.BFF.Compras"
 RUN dotnet build "GeekStore.BFF.Compras.csproj" -c Release -o /app/build
 
 FROM build AS publish
