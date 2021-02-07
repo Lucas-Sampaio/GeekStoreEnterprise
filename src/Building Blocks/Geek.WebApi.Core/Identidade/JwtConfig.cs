@@ -22,7 +22,7 @@ namespace Geek.WebApi.Core.Identidade
 
             }).AddJwtBearer(bearerOptions =>
             {
-                bearerOptions.RequireHttpsMetadata = true;
+                bearerOptions.RequireHttpsMetadata = false;
                 bearerOptions.SaveToken = true;
                 bearerOptions.SetJwksOptions(new JwkOptions(tokenConfig.AutenticacaoJwksUrl));
             });
