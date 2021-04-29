@@ -14,7 +14,7 @@ namespace GeekStore.Core.DomainObjects
         public Cpf(string numero)
         {
             if (!Validar(numero)) throw new DomainException("CPF inválido");
-            Numero = numero;
+            Numero = numero.ApenasNumeros();
         }
         public static bool Validar(string cpf)
         {
